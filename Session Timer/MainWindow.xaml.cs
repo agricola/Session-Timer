@@ -21,5 +21,20 @@ namespace Session_Timer {
         public MainWindow() {
             InitializeComponent();
         }
+
+        private void Pause(object sender, RoutedEventArgs e)
+        {
+            TimerLabel.Content = "Pause Pressed.";
+        }
+
+        private void Start(object sender, RoutedEventArgs e)
+        {
+            TimerLabel.Content = "Start Pressed.";
+        }
+
+        private void Reset(object sender, RoutedEventArgs e)
+        {
+            TimerLabel.Content = "Reset Pressed.";
+        }
     }
 }

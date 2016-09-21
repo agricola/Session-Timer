@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Label x:Name="TimerLabel" Content="Time goes here" Height="128" Margin="72,62,82,0" VerticalAlignment="Top" FontSize="48"/>
+        <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Left" Width="75" Margin="72,248,0,0" Click="Start" Height="20" VerticalAlignment="Top"/>
+        <Button x:Name="PauseButton" Content="Pause" HorizontalAlignment="Left" Margin="218,248,0,0" VerticalAlignment="Top" Width="75" Click="Pause"/>
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="360,248,0,0" VerticalAlignment="Top" Width="75" Click="Reset"/>
+
     </Grid>
 </Window>
