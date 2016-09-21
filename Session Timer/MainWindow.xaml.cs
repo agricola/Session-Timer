@@ -18,8 +18,29 @@ namespace Session_Timer {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+
+        TimerTime currentTimer;
+
         public MainWindow() {
             InitializeComponent();
+            currentTimer = NewTimer(2, 1); //makes a timer at 1 min 2 seconds (doesn't countdown auto)
+        }
+
+        private void CountdownOneSecondOnTimer() {
+            //lowers the timer by one second
+            currentTimer.CountdownOneSecond();
+        }
+
+        private string TimerDisplay() {
+            //gets current timer's display in string format
+            return currentTimer.TimeDisplay;
+        }
+
+        private TimerTime NewTimer(int seconds, int minutes) {
+            //creates a new instance of TimerTime
+            TimerTime newTimer;
+            newTimer = new TimerTime(seconds, minutes);
+            return newTimer;
         }
 
         private void Pause(object sender, RoutedEventArgs e)
