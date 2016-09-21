@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_Timer {
+
     class TimerTime {
         private int currentSeconds;
         private int currentMinutes;
@@ -12,16 +13,27 @@ namespace Session_Timer {
         private int originalMinutes;
 
         public TimerTime(int seconds, int minutes) {
-            this.currentSeconds = seconds;
-            this.originalSeconds = seconds;
+            if (seconds < 0 || minutes < 0) throw new ArgumentException();
 
-            this.currentMinutes = minutes;
-            this.originalMinutes = minutes;
+            int correctSeconds = seconds;
+            int correctMinutes = minutes;
+
+            if (correctSeconds > 59 || correctSeconds < 0 || correctMinutes < 0) {
+                ReformatMinutesAndSeconds(correctSeconds, correctMinutes, out correctSeconds, out correctMinutes);
+            }
+
+            this.currentSeconds = correctSeconds;
+            this.originalSeconds = correctSeconds;
+
+            this.currentMinutes = correctMinutes;
+            this.originalMinutes = correctMinutes;
     }
         
         public string TimeDisplay {
             get {
-                return String.Format("{0}:{1}", currentMinutes, currentSeconds);
+                string minutesDispaly = currentMinutes.ToString("00");
+                string secondsDispaly = currentSeconds.ToString("00");
+                return String.Format("{0}:{1}", minutesDispaly, secondsDispaly);
             }
         }
 
@@ -33,10 +45,13 @@ namespace Session_Timer {
             if (seconds > 59) {
                 int extraMinutes = (seconds / 60);
                 reformattedMinutes += extraMinutes;
-                reformattedSeconds = 0;
+
+                int extraSeconds = seconds % 60;
+                reformattedSeconds = extraSeconds;
             } else if (seconds < 0) {
                 int extraMinutes = -(seconds / 60);
                 reformattedMinutes -= (1 + extraMinutes);
+
                 reformattedSeconds = 59;
             }
 

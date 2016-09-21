@@ -23,7 +23,8 @@ namespace Session_Timer {
 
         public MainWindow() {
             InitializeComponent();
-            currentTimer = NewTimer(2, 1); //makes a timer at 1 min 2 seconds (doesn't countdown auto)
+            currentTimer = NewTimer(0, 1); //makes a timer at 1 min 2 seconds (doesn't countdown auto)
+            TimerLabel.Content = TimerDisplay();
         }
 
         private void CountdownOneSecondOnTimer() {
