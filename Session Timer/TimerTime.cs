@@ -79,6 +79,11 @@ namespace Session_Timer {
             return elapsedSeconds;
         }
 
+        public void ResetTime() {
+            currentSeconds = originalSeconds;
+            currentMinutes = originalMinutes;
+        }
+
         public void CountdownOneSecond() {
             currentSeconds -= 1;
             ReformatMinutesAndSeconds(currentSeconds, currentMinutes, out currentSeconds, out currentMinutes);
@@ -87,6 +92,14 @@ namespace Session_Timer {
         public void CountUpOneSecond() {
             currentSeconds += 1;
             ReformatMinutesAndSeconds(currentSeconds, currentMinutes, out currentSeconds, out currentMinutes);
+        }
+
+        public bool IsTimerFinished() {
+            bool finished = false;
+
+            if (currentSeconds == 0 && currentMinutes == 0) finished = true;
+
+            return finished;
         }
 
     }

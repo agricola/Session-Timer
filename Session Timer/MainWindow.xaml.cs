@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Session_Timer {
     /// <summary>
@@ -20,11 +22,37 @@ namespace Session_Timer {
     public partial class MainWindow : Window {
 
         TimerTime currentTimer;
+        TimerProfile currentProfile;
+        DispatcherTimer dispatcherTimer;
 
         public MainWindow() {
             InitializeComponent();
-            currentTimer = NewTimer(0, 1); //makes a timer at 1 min 2 seconds (doesn't countdown auto)
-            TimerLabel.Content = TimerDisplay();
+
+            currentTimer = NewTimer(30, 0);
+            currentProfile = new TimerProfile("Test", currentTimer); //in future currentTimer should come from the profile
+            dispatcherTimer = SetupDispatcherTimer();
+
+            DisplayCurrentTime();
+        }
+
+        private DispatcherTimer SetupDispatcherTimer() {
+            DispatcherTimer timer = new DispatcherTimer();
+
+            timer.Tick += new EventHandler(CountdownAndDisplayOnTick);
+            timer.Interval = new TimeSpan(0, 0, 1);
+
+            return timer;
+        }
+
+        private void CountdownAndDisplayOnTick(object sender, EventArgs e) {
+            //Debug.WriteLine("tick");
+            if (!currentTimer.IsTimerFinished()) {
+                CountdownOneSecondOnTimer();
+                DisplayCurrentTime();
+            } else {
+                CompleteTimer();
+            }
+
         }
 
         private void CountdownOneSecondOnTimer() {
@@ -32,9 +60,9 @@ namespace Session_Timer {
             currentTimer.CountdownOneSecond();
         }
 
-        private string TimerDisplay() {
-            //gets current timer's display in string format
-            return currentTimer.TimeDisplay;
+        private void DisplayCurrentTime() {
+            //updates timer to current time
+            TimerLabel.Content = currentTimer.TimeDisplay;
         }
 
         private TimerTime NewTimer(int seconds, int minutes) {
@@ -44,19 +72,29 @@ namespace Session_Timer {
             return newTimer;
         }
 
+        private void CompleteTimer() {
+            TimerLabel.Content = "TIMER FINISHED";
+            //Debug.WriteLine("TIMER FINISHED");
+            currentTimer.ResetTime();
+            dispatcherTimer.Stop();
+        }
+
         private void Pause(object sender, RoutedEventArgs e)
         {
-            TimerLabel.Content = "Pause Pressed.";
+            dispatcherTimer.Stop();
         }
 
         private void Start(object sender, RoutedEventArgs e)
         {
-            TimerLabel.Content = "Start Pressed.";
+            //Debug.WriteLine("start");
+            dispatcherTimer.Start();
         }
 
         private void Reset(object sender, RoutedEventArgs e)
         {
-            TimerLabel.Content = "Reset Pressed.";
+            dispatcherTimer.Stop();
+            currentTimer.ResetTime();
+            DisplayCurrentTime();
         }
     }
 }
