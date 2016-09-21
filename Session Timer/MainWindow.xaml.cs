@@ -96,5 +96,30 @@ namespace Session_Timer {
             currentTimer.ResetTime();
             DisplayCurrentTime();
         }
+
+        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            // ... A List.
+            List<string> data = new List<string>();
+            data.Add("VN");
+            data.Add("pornography");
+            
+            // ... Get the ComboBox reference.
+            var comboBox = sender as ComboBox;
+
+            // ... Assign the ItemsSource to the List.
+            comboBox.ItemsSource = data;
+
+            // ... Make the first item selected.
+            comboBox.SelectedIndex = 0;
+        }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //do stuff when changed
+            var comboBox = sender as ComboBox;
+            string value = comboBox.SelectedItem as string;
+            TimerLabel.Content = "Selected: " + value;
+        }
     }
 }
