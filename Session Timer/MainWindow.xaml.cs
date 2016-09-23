@@ -121,5 +121,11 @@ namespace Session_Timer {
             string value = comboBox.SelectedItem as string;
             TimerLabel.Content = "Selected: " + value;
         }
+
+        private void ProfilesSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Profiles OpenProfilesWindow = new Session_Timer.Profiles();
+            OpenProfilesWindow.Show();
+        }
     }
 }
