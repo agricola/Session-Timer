@@ -14,8 +14,8 @@
         <TextBox x:Name="ProfileLogLocation" HorizontalAlignment="Left" Height="23" Margin="128,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="LabelTime" Content="Time (MM:SS)" HorizontalAlignment="Left" Margin="128,74,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LabelLogLocation" Content="Log Location" HorizontalAlignment="Left" Margin="128,133,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="ProfileAdd" Content="+" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="34"/>
-        <Button x:Name="ProfileRemove" Content="-" HorizontalAlignment="Left" Margin="56,220,0,0" VerticalAlignment="Top" Width="37"/>
+        <Button x:Name="ProfileAdd" Content="+" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="34" Click="AddProfile"/>
+        <Button x:Name="ProfileRemove" Content="-" HorizontalAlignment="Left" Margin="56,220,0,0" VerticalAlignment="Top" Width="37" Click="RemoveProfile"/>
 
     </Grid>
 </Window>

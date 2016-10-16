@@ -6,13 +6,32 @@ using System.Threading.Tasks;
 
 namespace Session_Timer {
 
-    class TimerTime {
+    public class TimerTime {
         private int currentSeconds;
         private int currentMinutes;
         private int originalSeconds;
         private int originalMinutes;
 
+        public TimerTime(string timeText) {
+            if (timeText.Length != 5) throw new ArgumentException();
+            string[] time = timeText.Split(':');
+            if (time.Length != 2) throw new ArgumentException();
+            else SetTime(Int32.Parse(time[0]), Int32.Parse(time[1]));
+        }
+
         public TimerTime(int seconds, int minutes) {
+            SetTime(seconds, minutes);
+        }
+        
+        public string TimeDisplay {
+            get {
+                string minutesDispaly = currentMinutes.ToString("00");
+                string secondsDispaly = currentSeconds.ToString("00");
+                return String.Format("{0}:{1}", minutesDispaly, secondsDispaly);
+            }
+        }
+
+        private void SetTime(int seconds, int minutes) {
             if (seconds < 0 || minutes < 0) throw new ArgumentException();
 
             int correctSeconds = seconds;
@@ -27,14 +46,6 @@ namespace Session_Timer {
 
             this.currentMinutes = correctMinutes;
             this.originalMinutes = correctMinutes;
-    }
-        
-        public string TimeDisplay {
-            get {
-                string minutesDispaly = currentMinutes.ToString("00");
-                string secondsDispaly = currentSeconds.ToString("00");
-                return String.Format("{0}:{1}", minutesDispaly, secondsDispaly);
-            }
         }
 
         private void ReformatMinutesAndSeconds(int seconds, int minutes, out int reformattedSeconds, out int reformattedMinutes) {
