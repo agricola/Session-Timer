@@ -6,13 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Session_Timer {
-    [Serializable]
+    //[Serializable]
     public class TimerProfile {
         //private string name;
         //private TimerTime timerTime;
         //private string logLocation;
 
-        public TimerProfile() { }
+        public TimerProfile() {
+            this.Name = "Default";
+            this.TimerTime = new TimerTime("01:30");
+            this.LogLocation = "Default";
+        }
 
         public TimerProfile(string name, TimerTime timerTime, string logLocation = "") {
             this.Name = name;

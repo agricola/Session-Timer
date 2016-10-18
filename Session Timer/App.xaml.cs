@@ -11,9 +11,10 @@ namespace Session_Timer {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
+    /// 
     public partial class App : Application {
 
-        private static List<TimerProfile> timerProfiles;
+        //private static List<TimerProfile> timerProfiles;
 
         public App() {
             LoadProfiles();
@@ -24,20 +25,30 @@ namespace Session_Timer {
         }
 
         private void LoadProfiles() {
-            timerProfiles = new List<TimerProfile>();
-            //put loading from config here in the future
+            Debug.WriteLine("LOAD");
+            Session_Timer.Properties.Settings.Default.ListOfProfiles = new List<TimerProfile>();
+            //timerProfiles = Session_Timer.Properties.Settings.Default.ListOfProfiles;
+            //Session_Timer.Properties.Settings.Default.ListOfProfiles.Add(new TimerProfile("TEST", new TimerTime(30, 1), "blah"));
         }
 
         private void SaveProfiles() {
+            /*Session_Timer.Properties.Settings.Default.Reset();
+            
+            foreach (TimerProfile profile in timerProfiles) {
+                Session_Timer.Properties.Settings.Default.ListOfProfiles.Add(profile);
+            }*/
 
+            Session_Timer.Properties.Settings.Default.Save();
         }
 
         public static void RemoveProfile(TimerProfile profile) {
-            timerProfiles.Remove(profile);
+            //timerProfiles.Remove(profile);
+            Session_Timer.Properties.Settings.Default.ListOfProfiles.Remove(profile);
         }
 
         public static void AddProfile(TimerProfile profile) {
-            timerProfiles.Add(profile);
+            //timerProfiles.Add(profile);
+            Session_Timer.Properties.Settings.Default.ListOfProfiles.Add(profile);
         }
     }
 }

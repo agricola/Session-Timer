@@ -97,18 +97,21 @@ namespace Session_Timer {
             DisplayCurrentTime();
         }
 
+        private List<string> ListOfProfileNames() {
+            List<string> profileNames = new List<string>();
+            foreach (var profile in Session_Timer.Properties.Settings.Default.ListOfProfiles) {
+                profileNames.Add(profile.Name);
+            }
+            return profileNames;
+        }
+
         private void ComboBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            // ... A List.
-            List<string> data = new List<string>();
-            data.Add("VN");
-            data.Add("pornography");
-            
+        {            
             // ... Get the ComboBox reference.
             var comboBox = sender as ComboBox;
 
             // ... Assign the ItemsSource to the List.
-            comboBox.ItemsSource = data;
+            RefreshComboBox();
 
             // ... Make the first item selected.
             comboBox.SelectedIndex = 0;
@@ -124,8 +127,12 @@ namespace Session_Timer {
 
         private void ProfilesSettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            Profiles OpenProfilesWindow = new Session_Timer.Profiles();
+            Profiles OpenProfilesWindow = new Profiles();
             OpenProfilesWindow.Show();
+        }
+
+        public void RefreshComboBox() {
+            comboBox.ItemsSource = ListOfProfileNames();
         }
     }
 }

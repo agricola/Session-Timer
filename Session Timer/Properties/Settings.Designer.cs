@@ -25,13 +25,12 @@ namespace Session_Timer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public long Setting {
+        public global::System.Collections.Generic.List<Session_Timer.TimerProfile> ListOfProfiles {
             get {
-                return ((long)(this["Setting"]));
+                return ((global::System.Collections.Generic.List<Session_Timer.TimerProfile>)(this["ListOfProfiles"]));
             }
             set {
-                this["Setting"] = value;
+                this["ListOfProfiles"] = value;
             }
         }
     }
