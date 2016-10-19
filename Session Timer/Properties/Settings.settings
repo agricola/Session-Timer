@@ -5,5 +5,8 @@
     <Setting Name="ListOfProfiles" Type="System.Collections.Generic.List&lt;Session_Timer.TimerProfile&gt;" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ApplicationSettings" Type="Session_Timer.ApplicationSettings" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Session_Timer {
+namespace Session_Timer.Models {
     //[Serializable]
     public class TimerProfile {
         //private string name;

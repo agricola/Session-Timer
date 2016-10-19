@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Session_Timer {
+namespace Session_Timer.Models {
 
     public class TimerTime {
         private int currentSeconds;
@@ -22,7 +22,7 @@ namespace Session_Timer {
         public TimerTime(int seconds, int minutes) {
             SetTime(seconds, minutes);
         }
-        
+        //
         public string TimeDisplay {
             get {
                 string minutesDispaly = currentMinutes.ToString("00");

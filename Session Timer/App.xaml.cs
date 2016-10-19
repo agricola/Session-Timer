@@ -15,15 +15,23 @@ namespace Session_Timer {
     public partial class App : Application {
 
         //private static List<TimerProfile> timerProfiles;
+        private MainWindow mainWindow;
 
         public App() {
-            LoadProfiles();
+            //LoadProfiles();
         }
 
         ~App() {
-            SaveProfiles();
+            //SaveProfiles();
         }
 
+        private void ApplicationStartup(object sender, StartupEventArgs e) {
+            mainWindow = new MainWindow(new ViewModels.MainWindowViewModel());
+            //mainWindow.DataContext = new ViewModel();
+            mainWindow.Show();
+        }
+
+        /*
         private void LoadProfiles() {
             Debug.WriteLine("LOAD");
             Session_Timer.Properties.Settings.Default.ListOfProfiles = new List<TimerProfile>();
@@ -36,7 +44,7 @@ namespace Session_Timer {
             
             foreach (TimerProfile profile in timerProfiles) {
                 Session_Timer.Properties.Settings.Default.ListOfProfiles.Add(profile);
-            }*/
+            }
 
             Session_Timer.Properties.Settings.Default.Save();
         }
@@ -49,6 +57,6 @@ namespace Session_Timer {
         public static void AddProfile(TimerProfile profile) {
             //timerProfiles.Add(profile);
             Session_Timer.Properties.Settings.Default.ListOfProfiles.Add(profile);
-        }
+        }*/
     }
 }

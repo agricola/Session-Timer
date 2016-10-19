@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Profiles" Height="300" Width="300">
     <Grid>
+        <!--
         <ListBox x:Name="ProfileList" HorizontalAlignment="Left" Height="197" Margin="10,10,0,0" VerticalAlignment="Top" Width="83"/>
         <Label x:Name="LabelProfileName" Content="Name" HorizontalAlignment="Left" Margin="128,15,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="ProfileName" HorizontalAlignment="Left" Height="23" Margin="128,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -16,6 +17,6 @@
         <Label x:Name="LabelLogLocation" Content="Log Location" HorizontalAlignment="Left" Margin="128,133,0,0" VerticalAlignment="Top"/>
         <Button x:Name="ProfileAdd" Content="+" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" Width="34" Click="AddProfile"/>
         <Button x:Name="ProfileRemove" Content="-" HorizontalAlignment="Left" Margin="56,220,0,0" VerticalAlignment="Top" Width="37" Click="RemoveProfile"/>
-
+-->
     </Grid>
 </Window>

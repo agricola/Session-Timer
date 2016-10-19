@@ -18,7 +18,7 @@ namespace Session_Timer
     /// <summary>
     /// Interaction logic for Profiles.xaml
     /// </summary>
-    public partial class Profiles : Window
+   /* public partial class Profiles : Window
     {
         public Profiles()
         {
@@ -65,5 +65,5 @@ namespace Session_Timer
             //in the future make popup warning
             Debug.WriteLine("NO DUPES");
         }
-    }
+    }*/
 }
