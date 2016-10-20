@@ -16,6 +16,16 @@ namespace Session_Timer.ViewModels {
         }
 
         public AbstractViewModel() {
+            if (Properties.Settings.Default.ApplicationSettings == null) {
+                settings = new ApplicationSettings();
+                Properties.Settings.Default.ApplicationSettings = settings;
+                profiles = settings.Profiles;
+            } else {
+                settings = Properties.Settings.Default.ApplicationSettings;
+                profiles = settings.Profiles;
+            }
+                
+            
         }
 
         public List<TimerProfile> Profiles {

@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 
 namespace Session_Timer {
     public class ApplicationSettings {
-        public List<TimerProfile> Profiles { get; set; }
+        public List<TimerProfile> Profiles { get; set; } = new List<TimerProfile>();
     }
 }

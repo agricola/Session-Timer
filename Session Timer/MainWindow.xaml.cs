@@ -22,13 +22,9 @@ namespace Session_Timer {
     /// </summary>
     public partial class MainWindow : Window {
 
-
         public MainWindow(MainWindowViewModel dataContext) {
             InitializeComponent();
-
             this.DataContext = dataContext;
         }
-
-
     }
 }

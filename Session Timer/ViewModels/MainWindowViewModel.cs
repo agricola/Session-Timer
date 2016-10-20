@@ -4,16 +4,24 @@ using Session_Timer.Models;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.Windows.Data;
 
 namespace Session_Timer.ViewModels {
     public class MainWindowViewModel : AbstractViewModel {
 
-        private TimerTime currentTimer;
+        //private TimerTime currentTimer;
         private TimerProfile currentProfile;
         private DispatcherTimer dispatcherTimer;
         private string timeDisplay;
 
-        public string SelectedProfileName { get { return currentProfile.Name; } }
+        public TimerProfile SelectedProfile {
+            get { return currentProfile; }
+            set {
+                Pause();
+                SetProperty(ref currentProfile, value);
+                DisplayCurrentTime();
+            }
+        }
         public string TimeDisplay {
             get { return timeDisplay; }
             set { SetProperty(ref timeDisplay, value); }
@@ -26,10 +34,14 @@ namespace Session_Timer.ViewModels {
         public Command ProfileSettingsCommand { get; private set; }
 
         public MainWindowViewModel() : base() {
-            Debug.WriteLine(settings);
-            currentTimer = NewTimer(30, 0);
-            currentProfile = new TimerProfile("Test", currentTimer); //in future currentTimer should come from the profile
             dispatcherTimer = SetupDispatcherTimer();
+            TimerTime currentTimer = new TimerTime(30, 0);
+            SelectedProfile = new TimerProfile("Test", currentTimer); //in future currentTimer should come from the profile
+            //Debug.WriteLine(SelectedProfile);
+            //Debug.WriteLine(Profiles);
+            Profiles.Add(SelectedProfile);
+            Profiles.Add(new TimerProfile("Test1", new TimerTime(45, 0)));
+            
 
             StartCommand = new Command(Start);
             PauseCommand = new Command(Pause);
@@ -50,7 +62,7 @@ namespace Session_Timer.ViewModels {
 
         private void CountdownAndDisplayOnTick(object sender, EventArgs e) {
             //Debug.WriteLine("tick");
-            if (!currentTimer.IsTimerFinished()) {
+            if (!SelectedProfile.TimerTime.IsTimerFinished()) {
                 CountdownOneSecondOnTimer();
                 DisplayCurrentTime();
             } else {
@@ -61,31 +73,24 @@ namespace Session_Timer.ViewModels {
 
         private void CountdownOneSecondOnTimer() {
             //lowers the timer by one second
-            currentTimer.CountdownOneSecond();
+            SelectedProfile.TimerTime.CountdownOneSecond();
         }
 
         private void DisplayCurrentTime() {
             //updates timer to current time
-            TimeDisplay = currentTimer.TimeDisplay;
-        }
-
-        private TimerTime NewTimer(int seconds, int minutes) {
-            //creates a new instance of TimerTime
-            TimerTime newTimer;
-            newTimer = new TimerTime(seconds, minutes);
-            return newTimer;
+            TimeDisplay = SelectedProfile.TimerTime.TimeDisplay;
         }
 
         private void CompleteTimer() {
             TimeDisplay = "TIMER FINISHED";
             //Debug.WriteLine("TIMER FINISHED");
-            currentTimer.ResetTime();
+            SelectedProfile.TimerTime.ResetTime();
             dispatcherTimer.Stop();
         }
 
         private void Pause() {
             Debug.WriteLine("pause");
-            dispatcherTimer.Stop();
+            if (dispatcherTimer != null) dispatcherTimer.Stop();
         }
 
         private void Start() {
@@ -96,10 +101,10 @@ namespace Session_Timer.ViewModels {
         private void Reset() {
             Debug.WriteLine("reset");
             dispatcherTimer.Stop();
-            currentTimer.ResetTime();
+            SelectedProfile.TimerTime.ResetTime();
             DisplayCurrentTime();
         }
-
+        /*
         private List<string> ListOfProfileNames() {
             List<string> profileNames = new List<string>();
             foreach (var profile in Session_Timer.Properties.Settings.Default.ListOfProfiles) {
@@ -108,7 +113,7 @@ namespace Session_Timer.ViewModels {
             return profileNames;
         }
 
-        /*private void ComboBox_Loaded(object sender, RoutedEventArgs e) {
+        private void ComboBox_Loaded(object sender, RoutedEventArgs e) {
             // ... Get the ComboBox reference.
             var comboBox = sender as ComboBox;
 
