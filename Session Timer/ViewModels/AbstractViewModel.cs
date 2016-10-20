@@ -8,36 +8,35 @@ namespace Session_Timer.ViewModels {
     public abstract class AbstractViewModel : BindableBase {
 
         protected static ApplicationSettings settings;
-        protected static List<TimerProfile> profiles;
+        //protected static ObservableCollection<TimerProfile> profiles;
 
         public AbstractViewModel(ApplicationSettings appSettings) {
             settings = appSettings;
-            profiles = settings.Profiles;
+            Profiles = settings.Profiles;
         }
 
-        public AbstractViewModel() {
+        public AbstractViewModel() {    //how to deal with this global shit
             if (Properties.Settings.Default.ApplicationSettings == null) {
                 settings = new ApplicationSettings();
                 Properties.Settings.Default.ApplicationSettings = settings;
-                profiles = settings.Profiles;
+                Profiles = settings.Profiles;
             } else {
                 settings = Properties.Settings.Default.ApplicationSettings;
-                profiles = settings.Profiles;
+                Profiles = settings.Profiles;
             }
-                
-            
         }
 
-        public List<TimerProfile> Profiles {
-            get { return profiles; }
-            set { SetSettingsAndProfiles(value); }
-        }
-
+        public ObservableCollection<TimerProfile> Profiles { get; set; }
+       /*     get { return profiles; }
+            set { profiles = value;}
+        }*/
+        /*
         protected void SetSettingsAndProfiles(List<TimerProfile> value) {
             SetProperty(ref profiles, value);
             settings.Profiles = profiles;
-        }
-
+            profiles = value;
+        }*/
+/*
         public void AddProfile(TimerProfile profile) {
             profiles.Add(profile);
             SetSettingsAndProfiles(profiles);
@@ -46,6 +45,6 @@ namespace Session_Timer.ViewModels {
         public void RemoveProfile(TimerProfile profile) {
             profiles.Add(profile);
             SetSettingsAndProfiles(profiles);
-        }
+        }*/
     }
 }

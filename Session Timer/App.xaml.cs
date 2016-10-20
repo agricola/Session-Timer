@@ -14,49 +14,11 @@ namespace Session_Timer {
     /// 
     public partial class App : Application {
 
-        //private static List<TimerProfile> timerProfiles;
         private MainWindow mainWindow;
-
-        public App() {
-            //LoadProfiles();
-        }
-
-        ~App() {
-            //SaveProfiles();
-        }
 
         private void ApplicationStartup(object sender, StartupEventArgs e) {
             mainWindow = new MainWindow(new ViewModels.MainWindowViewModel());
-            //mainWindow.DataContext = new ViewModel();
             mainWindow.Show();
         }
-
-        /*
-        private void LoadProfiles() {
-            Debug.WriteLine("LOAD");
-            Session_Timer.Properties.Settings.Default.ListOfProfiles = new List<TimerProfile>();
-            //timerProfiles = Session_Timer.Properties.Settings.Default.ListOfProfiles;
-            //Session_Timer.Properties.Settings.Default.ListOfProfiles.Add(new TimerProfile("TEST", new TimerTime(30, 1), "blah"));
-        }
-
-        private void SaveProfiles() {
-            /*Session_Timer.Properties.Settings.Default.Reset();
-            
-            foreach (TimerProfile profile in timerProfiles) {
-                Session_Timer.Properties.Settings.Default.ListOfProfiles.Add(profile);
-            }
-
-            Session_Timer.Properties.Settings.Default.Save();
-        }
-
-        public static void RemoveProfile(TimerProfile profile) {
-            //timerProfiles.Remove(profile);
-            Session_Timer.Properties.Settings.Default.ListOfProfiles.Remove(profile);
-        }
-
-        public static void AddProfile(TimerProfile profile) {
-            //timerProfiles.Add(profile);
-            Session_Timer.Properties.Settings.Default.ListOfProfiles.Add(profile);
-        }*/
     }
 }

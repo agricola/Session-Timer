@@ -15,8 +15,13 @@ namespace Session_Timer.ViewModels {
         private string timeDisplay;
 
         public TimerProfile SelectedProfile {
-            get { return currentProfile; }
-            set {
+            get
+            {
+                if (currentProfile == null) return Profiles[0];
+                else return currentProfile;
+            }
+            set
+            {
                 Pause();
                 SetProperty(ref currentProfile, value);
                 DisplayCurrentTime();
@@ -31,7 +36,7 @@ namespace Session_Timer.ViewModels {
         public Command ResetCommand { get; private set; }
         //public Command ComboBoxLoadCommand { get; private set; }
         //public Command ComboBoxChangeCommand { get; private set; }
-        public Command ProfileSettingsCommand { get; private set; }
+        public Command ProfilesWindowCommand { get; private set; }
 
         public MainWindowViewModel() : base() {
             dispatcherTimer = SetupDispatcherTimer();
@@ -46,7 +51,7 @@ namespace Session_Timer.ViewModels {
             StartCommand = new Command(Start);
             PauseCommand = new Command(Pause);
             ResetCommand = new Command(Reset);
-            ProfileSettingsCommand = new Command(ProfilesSettingsButton_Click);
+            ProfilesWindowCommand = new Command(OpenProfilesWindow);
 
             DisplayCurrentTime();
         }
@@ -131,9 +136,9 @@ namespace Session_Timer.ViewModels {
             TimerLabel.Content = "Selected: " + value;
         }*/
 
-        private void ProfilesSettingsButton_Click() {
-            Profiles OpenProfilesWindow = new Profiles();
-            OpenProfilesWindow.Show();
+        private void OpenProfilesWindow() {
+            ProfilesWindow profilesWindow = new ProfilesWindow(new ProfilesWindowViewModel());
+            profilesWindow.Show();
         }
         /*
         public void RefreshComboBox() {

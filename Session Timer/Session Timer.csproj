@@ -76,11 +76,12 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Models\TimerProfile.cs" />
     <Compile Include="Models\TimerTime.cs" />
-    <Compile Include="Profiles.xaml.cs">
-      <DependentUpon>Profiles.xaml</DependentUpon>
+    <Compile Include="ProfilesWindow.xaml.cs">
+      <DependentUpon>ProfilesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AbstractViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ProfilesWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,7 +94,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Profiles.xaml">
+    <Page Include="ProfilesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
