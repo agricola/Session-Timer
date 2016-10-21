@@ -7,12 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Label x:Name="TimerLabel" Content="Time goes here" Height="128" Margin="72,62,49,0" VerticalAlignment="Top" FontSize="48"/>
-        <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Left" Width="75" Margin="72,248,0,0" Click="Start" Height="20" VerticalAlignment="Top"/>
-        <Button x:Name="PauseButton" Content="Pause" HorizontalAlignment="Left" Margin="218,248,0,0" VerticalAlignment="Top" Width="75" Click="Pause"/>
-        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="360,248,0,0" VerticalAlignment="Top" Width="75" Click="Reset"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="72,10,0,0" VerticalAlignment="Top" Width="287" Loaded="ComboBox_Loaded" SelectionChanged="comboBox_SelectionChanged"/>
-        <Button x:Name="ProfilesSettingsButton" Content="Profiles" HorizontalAlignment="Left" Margin="393,12,0,0" VerticalAlignment="Top" Width="75" Click="ProfilesSettingsButton_Click"/>
-
+        <Label x:Name="TimerLabel" Content="{Binding TimeDisplay}" Height="128" Margin="72,62,49,0" VerticalAlignment="Top" FontSize="48"/>
+        <Button x:Name="StartButton" Content="Start" HorizontalAlignment="Left" Width="75" Margin="72,248,0,0" Height="20" VerticalAlignment="Top" Command="{Binding StartCommand}"/>
+        <Button x:Name="PauseButton" Content="Pause" HorizontalAlignment="Left" Margin="218,248,0,0" VerticalAlignment="Top" Width="75" Command="{Binding PauseCommand}"/>
+        <Button x:Name="ResetButton" Content="Reset" HorizontalAlignment="Left" Margin="360,248,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ResetCommand}"/>
+        <Button x:Name="ProfilesSettingsButton" Content="Profiles" HorizontalAlignment="Left" Margin="393,12,0,0" VerticalAlignment="Top" Width="75" Command="{Binding ProfilesWindowCommand}"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="72,10,0,0" VerticalAlignment="Top" Width="287"
+                  ItemsSource="{Binding Profiles}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding Path=SelectedProfile, Mode=TwoWay}"/>
     </Grid>
 </Window>
